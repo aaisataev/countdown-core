@@ -13,7 +13,6 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "14.0"
   spec.source       = { :git => "https://github.com/aaisataev/countdown-core.git", :tag => "#{spec.version}" }
-  spec.source_files  = "countdown-core/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+  spec.source_files  = "countdown-core/**/*.{h,m,swift}"
 
 end

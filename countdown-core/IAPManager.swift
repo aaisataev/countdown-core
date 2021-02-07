@@ -7,17 +7,17 @@
 
 import StoreKit
 
-final class IAPManager: NSObject, UIApplicationDelegate {
+public final class IAPManager: NSObject, UIApplicationDelegate {
     private var request: SKProductsRequest?
     private var productsCompletion: ((Result<[SKProduct], Error>) -> Void)?
     private var restoreCompletion: ((Result<String, Error>) -> Void)?
     private var transactionCompletion: ((Result<String, Error>) -> Void)?
 
-    static let shared = IAPManager()
+    public static let shared = IAPManager()
 
     override private init() { super.init() }
 
-    func application(
+    public func application(
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
@@ -25,11 +25,11 @@ final class IAPManager: NSObject, UIApplicationDelegate {
         return true
     }
 
-    var canMakePayments: Bool {
+    public var canMakePayments: Bool {
         SKPaymentQueue.canMakePayments()
     }
 
-    func requestProducts(
+    public func requestProducts(
         productIdentifiers: Set<String>,
         completion: @escaping (Result<[SKProduct], Error>) -> Void
     ) {
@@ -42,7 +42,7 @@ final class IAPManager: NSObject, UIApplicationDelegate {
         request?.start()
     }
 
-    func buy(
+    public func buy(
         product: SKProduct,
         completion: @escaping (Result<String, Error>) -> Void
     ) {
@@ -51,7 +51,7 @@ final class IAPManager: NSObject, UIApplicationDelegate {
         SKPaymentQueue.default().add(payment)
     }
 
-    func restorePurchases(
+    public func restorePurchases(
         completion: @escaping (Result<String, Error>) -> Void
     ) {
         restoreCompletion = completion
@@ -59,7 +59,7 @@ final class IAPManager: NSObject, UIApplicationDelegate {
     }
 }
 
-extension IAPManager: SKProductsRequestDelegate {
+public extension IAPManager: SKProductsRequestDelegate {
     func productsRequest(
         _: SKProductsRequest,
         didReceive response: SKProductsResponse
@@ -76,7 +76,7 @@ extension IAPManager: SKProductsRequestDelegate {
     }
 }
 
-extension IAPManager: SKPaymentTransactionObserver {
+public extension IAPManager: SKPaymentTransactionObserver {
     func paymentQueue(
         _: SKPaymentQueue,
         updatedTransactions transactions: [SKPaymentTransaction]
